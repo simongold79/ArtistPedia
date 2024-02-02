@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Angular App</title>
+
+	<!-- AngularJS Core JS File -->
+	<script type="text/javascript" src="lib/angular/angular.js"></script>
+
+	<!-- AngularJS Bootstrap JS File -->
+	<script type="text/javascript" src="lib/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+
+	<!-- Bootstrap CSS File -->
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
+
+	<!-- Our app.js File -->
+	<script type="text/javascript" src="app.js"></script>
+
+	<!-- Our style.css File -->
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+	<div class="container" ng-controller="myCtrl">
+	
+	<!-- the form -->
+	<div class="row artistsform">
+		<div class="input-group input-group-lg">
+			<span class="input-group-addon" id="sizing-addon1">
+				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+			</span>
+			<input type="text" class="form-control" placeholder="Search for artist..." ng-model="query"/>
+		</div>
+		<br />
+		<label>
+			Ascending
+			<input type="radio" name="direction" ng-model="direction" checked>
+		</label>
+		<label>
+			Descending
+			<input type="radio" name="direction" ng-model="direction" value="reverse">
+		</label>
+		</div>
+
+		<ul class="artistslist">
+			<li ng-repeat="item in artists | filter: {name:query} | orderBy: 'typeofmusic' : direction">
+				<div class="row">
+					<div class="artistcard">
+						<div class="artisttop clearfix">
+							<div class="artistimage">
+								<img ng-src="images/{{item.shortname}}.jpg" />
+							</div>
+							<div class="artistinfo">
+								<h3>{{item.name}}</h3>
+								<h4>{{item.typeofmusic}}</h4>
+							</div>
+						</div>
+						<div class="artistbio">
+							<p>{{item.bio}}</p>
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+</body>
+
+</html>
